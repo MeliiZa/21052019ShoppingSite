@@ -96,7 +96,7 @@ def show_shopping_cart():
         cart_melons.append(melon)
 
 
-    return render_template("cart.html",cart= cart_melons, order_total=Orde)
+    return render_template("cart.html",cart= cart_melons, order = order_total)
     return render_template("melon_details.html",
                            display_melon=melon)
 
@@ -120,8 +120,16 @@ def add_to_cart(melon_id):
     # - increment the count for that melon id by 1
     # - flash a success message
     # - redirect the user to the cart page
+    if "cart" in session:
+        cart = session['cart']
+    else:
+        cart = session ['cart'] = {}
 
-    return "Oops! This needs to be implemented!"
+    cart[melon_id] = cart.get(melon_id, 0) + 1
+
+    flash("Melon has been added to your cart")
+    return redirect("/cart")
+
 
 
 @app.route("/login", methods=["GET"])
