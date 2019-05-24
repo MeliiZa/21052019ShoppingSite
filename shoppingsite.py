@@ -96,9 +96,9 @@ def show_shopping_cart():
         cart_melons.append(melon)
 
 
-    return render_template("cart.html",cart= cart_melons, order = order_total)
+    return render_template("cart.html",cart = cart_melons, order_total = order_total)
     return render_template("melon_details.html",
-                           display_melon=melon)
+                           display_melon = melon)
 
     return render_template("cart.html")
 
@@ -126,7 +126,7 @@ def add_to_cart(melon_id):
         cart = session ['cart'] = {}
 
     cart[melon_id] = cart.get(melon_id, 0) + 1
-
+    print(cart)
     flash("Melon has been added to your cart")
     return redirect("/cart")
 
